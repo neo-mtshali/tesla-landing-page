@@ -1,131 +1,424 @@
-/* Google Fonts */
+/* Google Fonts - Using system font stack similar to Tesla */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-* {
+/* Reset and Base Styles */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
-}
-.content-wrapper {
-  background: url(https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Homepage-Model-3-Desktop-US.png);
-  height: 100vh;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat; 
-  display: flex;
-  flex-direction: column;
 }
 
-.nav {
-  width: 100%;
-  height: 60px;
-  padding: 0px 32px;
-  display: flex;
-  justify-content: space-between;
+html {
+  scroll-behavior: smooth;
 }
 
-.logo-container {
-  width: 130px;
-  height: 60px;
-  display: flex;
-}
-
-.logo-container:hover{
-  cursor: pointer;
-}
-
-
-.middle-section ul{
-  display: flex;
-  list-style: none;
-  gap: 20px;
-  height: 60px;
-}
-
-.middle-section ul li{
-  display: flex;
-  align-items: center;
-
-}
-.middle-section ul li a{
-  color: white;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-}
-
-.middle-section ul li a:hover{
-  background-color: #ddd;
-  color: #000;
-}
-
-.icon-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #000;
   color: #fff;
-  
+  overflow-x: hidden;
 }
 
-.icon-section:hover {
-  cursor: pointer;
-}
-
-.main-content{
-  color: white;
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  margin-top: 62;
-  
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+  background: transparent;
+  transition: background 0.3s ease;
 }
 
-.main-content h1 {
-  font-size: 56px; 
-  margin-bottom: 10px;
-  font-weight: 500;
-  margin-top: 22px;
+.nav-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
-.main-content h2 {
-  font-size: x-large; 
-  margin-bottom: 10px;
+.tesla-logo {
+  width: 120px;
+  height: 24px;
+  fill: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.main-content h2 a {
-  color: white;
-  font-weight: 500;
-  text-underline-offset: 7px;
-  font-size: 28px;
+.tesla-logo:hover {
+  opacity: 0.7;
 }
 
-.main-content p {
-  font-size: 17px; 
-  margin-bottom: 380px;
-  font-weight: 500;
-}
-
-.button-section{
+.nav-center {
+  flex: 2;
   display: flex;
   justify-content: center;
-  padding-top: 60px;
 }
-.blue-btn, .white-btn{
-  padding: 10px 85px;
-  text-decoration: none;
-  border-radius: 5px;
-  margin: 0 8px;
-  margin-top: 60px;
-}
- .blue-btn{
-  background-color: #3e6ae0;
-  color: white;
- }
 
- .white-btn{
-  background-color: #fefefe;
-  color: #393c41;
- }
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 4px;
+}
+
+.nav-menu li a {
+  display: block;
+  padding: 8px 16px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.nav-menu li a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.nav-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-icon .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Scroll Container with Snap */
+.scroll-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+/* Hero Section */
+.hero-section {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 120px 24px 80px;
+  scroll-snap-align: start;
+  background-image: var(--bg-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.15) 100%);
+  pointer-events: none;
+}
+
+/* Hero Content */
+.hero-content {
+  text-align: center;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.hero-content-dark h1 {
+  color: #171a20;
+}
+
+.hero-subtitle {
+  margin-bottom: 4px;
+}
+
+.hero-subtitle a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  transition: opacity 0.2s;
+}
+
+.hero-subtitle a:hover {
+  opacity: 0.7;
+}
+
+.hero-content-dark .hero-subtitle a {
+  color: #171a20;
+}
+
+.hero-price {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.hero-content-dark .hero-price {
+  color: #171a20;
+}
+
+/* Hero Buttons */
+.hero-buttons {
+  display: flex;
+  gap: 24px;
+  z-index: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 264px;
+  height: 40px;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: rgba(23, 26, 32, 0.8);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.btn-primary:hover {
+  background: rgba(23, 26, 32, 0.9);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.65);
+  color: #171a20;
+  backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.btn-dark {
+  background: rgba(23, 26, 32, 0.8);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.btn-dark:hover {
+  background: rgba(23, 26, 32, 0.9);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator .material-symbols-outlined {
+  font-size: 32px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Scroll Navigation Dots */
+.scroll-nav {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 90;
+}
+
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.scroll-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.scroll-dot.active {
+  background: #fff;
+}
+
+/* Light Section Variant */
+.hero-section-light .scroll-indicator .material-symbols-outlined {
+  color: #171a20;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-icon:not(:last-of-type) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 16px;
+  }
+
+  .tesla-logo {
+    width: 100px;
+  }
+
+  .hero-section {
+    padding: 100px 16px 60px;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 16px;
+    gap: 8px;
+  }
+
+  .btn {
+    width: 100%;
+    min-width: unset;
+    max-width: 400px;
+  }
+
+  .scroll-nav {
+    display: none;
+  }
+
+  .scroll-indicator {
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .hero-subtitle a {
+    font-size: 13px;
+  }
+
+  .hero-price {
+    font-size: 13px;
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .scroll-indicator {
+    animation: none;
+  }
+
+  .btn {
+    transition: none;
+  }
+}
